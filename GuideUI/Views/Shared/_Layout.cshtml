@@ -1,0 +1,146 @@
+﻿
+<!doctype html>
+<html class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#fff',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .opened {
+            display: block;
+        }
+
+        .closed {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-gray-700">
+
+    <main class="container mx-auto mt-6 ">
+        <div class="flex flex-wrap md:flex-nowrap mb-3 ">
+            <aside class=" mx-3 mb-3 w-full h-full md:w-96 rounded-lg px-6 py-8 shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)]">
+                <button id="theme-toggle" type="button"
+                        class="flex  mb-2 text-gray-500 dark:text-gray-400 bg-slate-300 dark:bg-gray-600  focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 w-full">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                              fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="ml-2 font-bold	 ">@Model.SystemLanguage.DarkModeText()</span>
+                </button>
+                <div>
+                    <input class="shadow appearance-none  border rounded w-full py-2 px-3 text-gray-700 font-semibold leading-tight focus:outline-none focus:shadow-outline"
+                           id="search" type="text" placeholder="@Model.SystemLanguage.SearchText()">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40"><path d="M33 35.292 22.125 24.417Q20.875 25.458 19.229 26.042Q17.583 26.625 15.708 26.625Q11.125 26.625 7.938 23.417Q4.75 20.208 4.75 15.708Q4.75 11.167 7.938 7.979Q11.125 4.792 15.667 4.792Q20.208 4.792 23.396 7.979Q26.583 11.167 26.583 15.708Q26.583 17.5 26 19.146Q25.417 20.792 24.375 22.167L35.25 33ZM15.667 23.458Q18.917 23.458 21.167 21.188Q23.417 18.917 23.417 15.708Q23.417 12.458 21.167 10.208Q18.917 7.958 15.667 7.958Q12.458 7.958 10.188 10.208Q7.917 12.458 7.917 15.708Q7.917 18.917 10.167 21.188Q12.417 23.458 15.667 23.458Z"/></svg> -->
+                </div>
+
+                <ul id="menu" class="menu list-none mt-3  text-slate-900 dark:text-gray-300">
+
+                    @foreach (var item in Model.Categories)
+                    {
+                        <li id="side-menu">
+                            <div class="flex justify-between">
+                                <span class="text-lg  font-medium tracking-tight hover:text-lime-700">@item.Title</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="fill-white" height="24" width="24">
+                                    <path d="M12 15.375 6 9.375 7.4 7.975 12 12.575 16.6 7.975 18 9.375Z" />
+                                </svg>
+                            </div>
+
+                            <ul class="sub-menu list-none px-3">
+                                @foreach (var title in Model.Titles)
+                                {
+                                    @if (title.CategoryId == item.CategoryId)
+                                    {
+                                        <li>
+                                            <a href="/@Model.CurrentLanguage/@Model.CurrentPlatform/@title.Url" class="hover:text-lime-800 @*@(@Model.Content.Title == title.Title ? "text-lime-700":"")*@">
+                                                @title.Title
+                                            </a>
+                                        </li>
+
+                                    }
+
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </aside>
+            @RenderBody()
+        </div>
+    </main>
+
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Change the icons inside the button based on previous settings
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        var themeToggleBtn = document.getElementById('theme-toggle');
+        var themeText = document.getElementById('theme-text')
+
+        themeToggleBtn.addEventListener('click', function() {
+
+            // toggle icons inside button
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            // if set via local storage previously
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+
+                // if NOT set via local storage previously
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+
+        });
+
+    </script>
+
+      @RenderSection("scripts", required: false)
+
+</body>
+</html>

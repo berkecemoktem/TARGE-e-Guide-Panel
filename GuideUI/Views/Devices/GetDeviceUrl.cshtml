@@ -1,0 +1,151 @@
+﻿@model GuideUI.Models.GuideListData;
+
+@{
+    var modelContent = Model.Content;
+}
+
+<section class="w-full">
+    <div class="rounded-lg px-6 py-8 mx-3 mb-3 flex flex-col shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)] ">
+        <div class="mb-2 text-base font-medium text-slate-900  dark:text-gray-300">
+            <a href="#">@Model.CurrentPlatform /</a>
+            <a href="#"> @Model.CurrentCategory.Title/</a>
+            <span class="text-sm text-slate-800 dark:text-gray-300">@Model.Content.Title</span>
+        </div>
+
+        <div class="flex justify-between items-center">
+            <div class="flex justify-center flex-col">
+
+                <div class="flex flex-wrap">
+                    <a href="#"
+                       class=" px-3 mr-1 mb-1  h-7 rounded-md flex items-center justify-center bg-slate-300 text-slate-700 dark:bg-slate-600 dark:text-gray-300">
+                        @Model.SystemLanguage.KeywordText()
+                    </a>
+                    @foreach (var item in Model.Keywords)
+                    {
+                        <a href="/@Model.CurrentLanguage/@Model.CurrentPlatform/@Model.SystemLanguage.UrlKeywordText()/@item.KeywordId"
+                       class="px-3 mr-1 mb-1  h-7 rounded-md flex items-center justify-center bg-slate-300 text-slate-700 dark:bg-slate-600 dark:text-gray-300  peer-checked:bg-slate-100 peer-checked:text-slate-900">
+                            @item.Title
+                        </a>
+                    }
+
+                </div>
+            </div>
+            <div class="flex items-center">
+
+
+                @foreach (var item in Model.OtherPlatforms)
+                {
+                    if (item.PlatformGroup == 1)
+                    {
+                        <a class="bg-slate-300 rounded-lg dark:bg-gray-600 p-2 mr-1  flex justify-center items-center "
+                   href="/@Model.CurrentLanguage/@item.PlatformName/@modelContent.Url">
+
+                            <svg class="fill-stone-700	dark:fill-gray-300 dark:hover:fill-lime-500  hover:fill-lime-700"
+                         xmlns="http://www.w3.org/2000/svg" height="24" width="24">
+                                <path d="M13 20Q13 17.725 12.137 15.725Q11.275 13.725 9.775 12.225Q8.275 10.725 6.275 9.863Q4.275 9 2 9V6Q2 5.175 2.588 4.588Q3.175 4 4 4H20Q20.825 4 21.413 4.588Q22 5.175 22 6V18Q22 18.825 21.413 19.413Q20.825 20 20 20ZM9 20Q9 17.075 6.963 15.037Q4.925 13 2 13V11Q3.875 11 5.513 11.712Q7.15 12.425 8.363 13.637Q9.575 14.85 10.288 16.488Q11 18.125 11 20ZM5 20Q5 18.75 4.125 17.875Q3.25 17 2 17V15Q4.075 15 5.537 16.462Q7 17.925 7 20Z" />
+                            </svg>
+
+                        </a>
+
+                    }
+                    else if (item.PlatformGroup == 2)
+                    {
+                        <a class="rounded-lg  bg-slate-300 dark:bg-gray-600 p-2 mr-1 " href="/@Model.CurrentLanguage/@item.PlatformName/@modelContent.Url">
+
+                            <svg class="fill-stone-700	dark:fill-gray-300 dark:hover:fill-lime-500  hover:fill-lime-700"
+                         xmlns="http://www.w3.org/2000/svg" height="24" width="24">
+                                <path d="M12 22q-2.05 0-3.875-.788-1.825-.787-3.187-2.15-1.363-1.362-2.15-3.187Q2 14.05 2 12q0-2.075.788-3.887.787-1.813 2.15-3.175Q6.3 3.575 8.125 2.787 9.95 2 12 2q2.075 0 3.887.787 1.813.788 3.175 2.151 1.363 1.362 2.15 3.175Q22 9.925 22 12q0 2.05-.788 3.875-.787 1.825-2.15 3.187-1.362 1.363-3.175 2.15Q14.075 22 12 22Zm3.95-14h2.95q-.725-1.25-1.813-2.175Q16 4.9 14.6 4.45q.45.825.788 1.712.337.888.562 1.838ZM10.1 8h3.8q-.3-1.1-.775-2.075Q12.65 4.95 12 4.05q-.65.9-1.125 1.875T10.1 8Zm-5.85 6h3.4q-.075-.5-.113-.988Q7.5 12.525 7.5 12t.037-1.012q.038-.488.113-.988h-3.4q-.125.5-.188.988Q4 11.475 4 12t.062 1.012q.063.488.188.988Zm5.15 5.55q-.45-.825-.787-1.713Q8.275 16.95 8.05 16H5.1q.725 1.25 1.812 2.175Q8 19.1 9.4 19.55ZM5.1 8h2.95q.225-.95.563-1.838.337-.887.787-1.712Q8 4.9 6.912 5.825 5.825 6.75 5.1 8ZM12 19.95q.65-.9 1.125-1.875T13.9 16h-3.8q.3 1.1.775 2.075.475.975 1.125 1.875ZM9.65 14h4.7q.075-.5.113-.988.037-.487.037-1.012t-.037-1.012q-.038-.488-.113-.988h-4.7q-.075.5-.112.988Q9.5 11.475 9.5 12t.038 1.012q.037.488.112.988Zm4.95 5.55q1.4-.45 2.487-1.375Q18.175 17.25 18.9 16h-2.95q-.225.95-.562 1.837-.338.888-.788 1.713ZM16.35 14h3.4q.125-.5.188-.988Q20 12.525 20 12t-.062-1.012q-.063-.488-.188-.988h-3.4q.075.5.112.988.038.487.038 1.012t-.038 1.012q-.037.488-.112.988Z" />
+                            </svg>
+                            
+                        </a>
+
+                    }
+                    else if (item.PlatformGroup == 3)
+                    {
+                        <a class="bg-slate-300 rounded-lg dark:bg-gray-600 p-2 mr-1" href="/@Model.CurrentLanguage/@item.PlatformName/@modelContent.Url">
+                            <svg class="fill-stone-700	dark:fill-gray-300 dark:hover:fill-lime-500  hover:fill-lime-700" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M12 20.5Q12.425 20.5 12.713 20.212Q13 19.925 13 19.5Q13 19.075 12.713 18.788Q12.425 18.5 12 18.5Q11.575 18.5 11.288 18.788Q11 19.075 11 19.5Q11 19.925 11.288 20.212Q11.575 20.5 12 20.5ZM7 16H17V6H7ZM7 23Q6.175 23 5.588 22.413Q5 21.825 5 21V3Q5 2.175 5.588 1.587Q6.175 1 7 1H17Q17.825 1 18.413 1.587Q19 2.175 19 3V21Q19 21.825 18.413 22.413Q17.825 23 17 23Z" /></svg>
+                        </a>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3 rounded-lg px-6 py-8 mx-3 shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)]">
+        <div class="flex justify-between items-center">
+            <h1 class="text-3xl mb-3 text-base font-medium text-slate-900 dark:text-gray-300">
+
+                @modelContent.Title
+
+
+
+            </h1>
+            <a class="rounded-lg  bg-slate-300 dark:bg-gray-600 flex items-center p-2" href="">
+                <svg class="fill-stone-700 dark:fill-gray-300 hover:fill-lime-800 hover:dark:fill-lime-500"
+                     xmlns="http://www.w3.org/2000/svg" height="40" width="40">
+                    <path d="M15.917 27.208 27.208 20 15.917 12.792ZM20 36.667Q16.583 36.667 13.542 35.354Q10.5 34.042 8.229 31.771Q5.958 29.5 4.646 26.458Q3.333 23.417 3.333 20Q3.333 16.583 4.646 13.542Q5.958 10.5 8.229 8.229Q10.5 5.958 13.542 4.646Q16.583 3.333 20 3.333Q23.417 3.333 26.458 4.646Q29.5 5.958 31.771 8.229Q34.042 10.5 35.354 13.542Q36.667 16.583 36.667 20Q36.667 23.417 35.354 26.458Q34.042 29.5 31.771 31.771Q29.5 34.042 26.458 35.354Q23.417 36.667 20 36.667ZM20 20Q20 20 20 20Q20 20 20 20Q20 20 20 20Q20 20 20 20Q20 20 20 20Q20 20 20 20Q20 20 20 20Q20 20 20 20ZM20 33.875Q25.75 33.875 29.812 29.812Q33.875 25.75 33.875 20Q33.875 14.25 29.812 10.188Q25.75 6.125 20 6.125Q14.25 6.125 10.188 10.188Q6.125 14.25 6.125 20Q6.125 25.75 10.188 29.812Q14.25 33.875 20 33.875Z" />
+                </svg>
+            </a>
+        </div>
+
+        <p class="text-slate-900 dark:text-gray-300 mt-3">
+            @if (Model.Content != null)
+            {
+                @modelContent.Description
+
+
+            }
+        </p>
+    </div>
+    <div class="mb-3 rounded-lg  px-6 py-8 mx-3 shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)]">
+        <h1 class="mb-2 text-xl text-base font-medium text-slate-900 dark:text-gray-300">
+
+            @Model.SystemLanguage.DocumentText()
+
+        </h1>
+        <div>
+            <div class="flex flex-wrap w-full">
+
+                @foreach (var item in Model.Documents)
+                {
+                    <a href="" class="mr-1 mb-2 px-2 py-1  flex items-center justify-center rounded-md text-slate-300 border border-slate-200"
+                   type="button" aria-label="Like">
+                        <svg class="fill-gray-300" xmlns="http://www.w3.org/2000/svg" height="24" width="24">
+                            <path d="M9 13H10V11H11Q11.425 11 11.713 10.712Q12 10.425 12 10V9Q12 8.575 11.713 8.287Q11.425 8 11 8H9ZM10 10V9H11V10ZM13 13H15Q15.425 13 15.713 12.712Q16 12.425 16 12V9Q16 8.575 15.713 8.287Q15.425 8 15 8H13ZM14 12V9H15V12ZM17 13H18V11H19V10H18V9H19V8H17ZM8 18Q7.175 18 6.588 17.413Q6 16.825 6 16V4Q6 3.175 6.588 2.587Q7.175 2 8 2H20Q20.825 2 21.413 2.587Q22 3.175 22 4V16Q22 16.825 21.413 17.413Q20.825 18 20 18ZM4 22Q3.175 22 2.588 21.413Q2 20.825 2 20V6H4V20Q4 20 4 20Q4 20 4 20H18V22Z" />
+                        </svg>
+                        <span class="ml-2">@item.DocumentName</span>
+                    </a>
+                }
+
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="rounded-lg  px-6 py-8 mx-3 shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)]">
+        <h1 class="mb-2 text-xl text-base font-medium text-slate-900 dark:text-gray-300">
+            @Model.SystemLanguage.LinkedContentText()
+        </h1>
+        <div>
+            <div class="flex flex-wrap">
+                @foreach (var item in Model.Routings)
+                {
+                    <a href="#"
+                   class=" px-3 mr-1 mb-1 py-1 rounded-md flex items-center justify-center bg-slate-300 text-slate-700 dark:bg-slate-600 dark:text-gray-300">
+                        @item.Title
+                    </a>
+                }
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+
+

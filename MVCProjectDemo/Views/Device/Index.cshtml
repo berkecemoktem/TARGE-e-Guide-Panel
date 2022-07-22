@@ -1,0 +1,91 @@
+﻿@model MVCProjectDemo.Models.GuideListViewModel;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+    var imagePath = "";
+
+
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/Main.min.css" />
+    </environment>
+    <title>Index</title>
+
+    }
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row gy-3">
+            <div class="col-lg-4 col-xl-4 col-md-12 overflow-auto">
+                <aside class="sidebar">
+                    <div class="sidebar-wrapper">
+                        <div class="languageList mb-2">
+                            <form asp-controller="Device" asp-action="Search">
+                                <select asp-items="Model.Languages" class="form-control">  </select>
+                            </form>
+                        </div>
+                        <div class="search-title">
+                            <form asp-controller="Device" asp-action="Search">
+                                <input asp-for="Guides.Title" placeholder="Search" class="form-control">
+                            </form>
+                            <img src="Assets/Icons/search.svg" />
+                        </div>
+
+
+                        <ul class="main-title list-unstyled ps-0">
+
+                            @{
+                                foreach (var category in Model.Categories)
+                                {
+
+                                    <li class="header-title">
+                                        <a href="#">
+                                            <img class="arrow-icon arrow-icon-open" src="icons/arrow.svg" />
+                                            @category.Text
+                                        </a>
+                                        <div class="sidebar-collapse collapse-open">
+                                            <ul class="subtitle list-unstyled">
+
+                                                @foreach (var title in Model.GuideTitles)
+                                                {
+                                                    <li>
+                                                        <a>
+                                                            aa
+                                                        </a>
+                                                    </li>
+                                                }
+
+                                            </ul>
+                                        </div>
+                                    </li>
+                                }
+                            }
+
+                        </ul>
+                        <ul class="main-title list-unstyled ps-0">
+
+                            <li class="header-title">
+
+                                @*// linkbutton*@
+                            </li>
+
+                        </ul>
+
+                </aside>
+            </div>
+        </div>
+    </div>
+    
+
+
+</body>
+</html>
