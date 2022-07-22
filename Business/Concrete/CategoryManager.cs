@@ -11,7 +11,7 @@ namespace Business.Concrete
         ICategoryDal _categoryDal = new EfCategoryDal();
         public List<Category> GetCategories(int languageId)
         {
-           return _categoryDal.GetAllOrderByLanguage(languageId); // Get All category by QueueId..
+           return _categoryDal.GetAllOrderByLanguage(languageId); // Get All category by QueueId.. dxfdfdg
         }
 
       
