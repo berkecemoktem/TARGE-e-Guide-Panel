@@ -87,7 +87,7 @@ namespace GuideUI.Controllers
                 Categories = _categoryManager.GetCategories(Language.LanguageId),
                 Titles = _guideManager.GetTitleByLanguage(Language.LanguageId, Platform.PlatformId),
                 Content = GuideContent,
-                Documents = _documentService.GetDocumentByGuide(GuideContent.GuideId, Language.LanguageId),
+                Documents = _documentService.GetDocumentByGuideAndLanguage(GuideContent.GuideId, Language.LanguageId),
                 CurrentPlatform = Platform.PlatformName,
                 OtherPlatforms = _platformManager.GetPlatformByLanguage(Language.LanguageId),
                 CurrentCategory = _categoryManager.GetCategory(guide.CategoryId),

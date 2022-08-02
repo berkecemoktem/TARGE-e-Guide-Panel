@@ -10,6 +10,30 @@ namespace Business.Concrete
     {
 
         IRoutingDal _routingDal = new EfRoutingDal();
+
+        public string Add(Routing r)
+        {
+            try
+            {
+                _routingDal.Add(r);
+            }
+            catch (System.Exception e)
+            {
+                return e.Message;
+            }
+            return "ekleme basarili";
+        }
+
+        public List<Routing> GetAll()
+        {
+           return  _routingDal.GetList();
+        }
+
+        public Routing GetRouting(Routing r)
+        {
+           return _routingDal.Get();
+        }
+
         public List<Routing> GetRoutingByGuide(int guideId)
         {
             return _routingDal.GetList(p => p.GuideId == guideId);

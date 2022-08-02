@@ -61,6 +61,7 @@ namespace Business.Concrete
 
         public Content Get()
         {
+            
             throw new NotImplementedException();
         }
 
@@ -72,6 +73,20 @@ namespace Business.Concrete
         public List<ContentPlatform> GetByGuides(List<GuideKeyword> guidesId,int languageId)
         {
             return _contentDal.GetByGuides(guidesId,languageId);
+        }
+
+        public string Add(Content content)
+        {
+            try
+            {
+               _contentDal.Add(content);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+                throw;
+            }
+            return "ekleme basarili";
         }
     }
 

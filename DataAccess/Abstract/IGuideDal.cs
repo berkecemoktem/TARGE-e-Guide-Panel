@@ -10,6 +10,9 @@ namespace DataAccess.Abstract
     public interface IGuideDal:IEntityRepository<Guide>
     {
         // Custom Operations (Only Guide Op.)
+
+        public Guide AddedGuide(Guide guide);
+
         public List<GuideContent> GetByIds(List<GuideKeyword>guideIds,int languageId, int platformId);
 
         public GuideContent GetGuideTitleByUrl(int languageId, int platformId, string url);

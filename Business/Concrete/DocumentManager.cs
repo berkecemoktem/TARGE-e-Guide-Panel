@@ -9,9 +9,40 @@ namespace Business.Concrete
     public class DocumentManager : IDocumentService
     {
         IDocumentDal _documentDAL = new EfDocumentDal();
-        public List<Document> GetDocumentByGuide(int guideId,int languageId)
+
+        public string Add(Document d)
         {
-            return _documentDAL.GetDocumentByGuide(guideId, languageId);
+            try
+            {
+                _documentDAL.Add(d);
+            }
+            catch (System.Exception e)
+            {
+                return e.Message;
+                throw;
+            }
+            return "ekleme basarili";
+        }
+
+        public List<Document> GetAll()
+        {           
+                return _documentDAL.GetList();         
+        }
+
+        public List<Document> GetDocumentByGuideAndLanguage(int guideId,int languageId)
+        {
+           // return _documentDAL.GetDocumentByGuide(guideId, languageId);
+           return _documentDAL.GetList(p=> p.GuideId == guideId && p.LanguageId == languageId);
+        }
+
+        public List<Document> GetDocumentByGuideId(int guideId)
+        {
+            return _documentDAL.GetList(p=> p.GuideId == guideId);
+        }
+
+        public List<Document> GetDocumentByLanguageId(int languageId)
+        {
+            return _documentDAL.GetList(p => p.LanguageId == languageId);
         }
     }
 

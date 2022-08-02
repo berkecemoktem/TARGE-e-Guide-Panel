@@ -7,6 +7,8 @@ namespace Business.Abstract
     {
          List<Language>GetLanguages ();
          Language GetLanguageByShortTitle(string sTitle);
+        public string Add(Language lan);
+        object GetById(int id);
     }
 
 }

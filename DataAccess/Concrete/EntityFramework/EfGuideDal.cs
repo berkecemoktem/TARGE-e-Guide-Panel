@@ -2,6 +2,7 @@
 using DataAccess.Abstract;
 using Entities.ComplexTypes;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -132,7 +133,17 @@ namespace DataAccess.Concrete.EntityFramework
             return "eklendi";
         }
 
-
+        public Guide AddedGuide(Guide guide)
+        {
+            using (var context = new TargeContext())
+            {
+                var addedEntity = context.Entry(guide);
+                addedEntity.State = EntityState.Added;
+                context.SaveChanges();
+                return addedEntity.Entity;
+            }
+           
+        }
     }
    
 

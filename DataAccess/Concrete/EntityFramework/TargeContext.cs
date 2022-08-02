@@ -1,5 +1,6 @@
 ﻿using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,7 +12,9 @@ namespace DataAccess.Concrete.EntityFramework
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=LAPTOP-AR4MMNII\SQLEXPRESS;Database=TargeGuide;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=BERKECEMOKTEM;Database=TargeGuide;Trusted_Connection=true");
+           // optionsBuilder.UseSqlServer(@"Server=LAPTOP-AR4MMNII\SQLEXPRESS;Database=TargeGuide;Trusted_Connection=true");
+
         }
         public DbSet<Guide> Guides { get; set; }
         public DbSet<Category> Categories{ get; set; }
@@ -24,4 +27,5 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Platform> Platforms{ get; set; }
 
     }
+   
 }

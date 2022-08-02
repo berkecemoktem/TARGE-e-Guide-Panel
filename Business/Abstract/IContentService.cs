@@ -7,6 +7,7 @@ namespace Business.Abstract
 {
     public interface IContentService
     {
+        string Add(Content content);
         List<Content> GetAll();
         List<Content> GetByGuide(int guideId);
         List<Content> GetById(int id);

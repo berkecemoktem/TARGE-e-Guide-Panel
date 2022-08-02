@@ -9,5 +9,9 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfPlatformDal : EfEntityRepositoryBase<Platform, TargeContext>, IPlatformDal
     {
+        public string AddGuide()
+        {
+            return "eklendi";
+        }
     }
 }

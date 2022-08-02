@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
 using Core.DataAccess.Hidden;
-using DataAccess.Concrete.AdoNet;
+//using DataAccess.Concrete.AdoNet;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;

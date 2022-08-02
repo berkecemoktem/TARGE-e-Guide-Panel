@@ -37,18 +37,17 @@ namespace Core.DataAccess.EntityFramework
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
             using (var context = new TContext())
-            {
-                return context.Set<TEntity>().SingleOrDefault(filter);
-            }
+
+            return context.Set<TEntity>().FirstOrDefault(filter);
         }
 
         public List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
             using (var context = new TContext())
             {
-                    return filter == null
-                    ? context.Set<TEntity>().ToList()
-                    : context.Set<TEntity>().Where(filter).ToList();
+                return filter == null
+                ? context.Set<TEntity>().ToList()
+                : context.Set<TEntity>().Where(filter).ToList();
             }
         }
 
@@ -63,4 +62,9 @@ namespace Core.DataAccess.EntityFramework
             }
         }
     }
-}
+
+    
+
+      
+    }
+

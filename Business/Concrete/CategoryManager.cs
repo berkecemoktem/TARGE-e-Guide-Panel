@@ -9,9 +9,34 @@ namespace Business.Concrete
     public class CategoryManager : ICategoryService
     {
         ICategoryDal _categoryDal = new EfCategoryDal();
+
+        public string Add(Category c)
+        {
+            try
+            {
+                _categoryDal.Add(c);
+            }
+            catch (System.Exception e)
+            {
+                return e.Message;
+                throw;
+            }
+            return "ekleme basarili;";
+        }
+
+        public List<Category> GetAll()
+        {
+            return _categoryDal.GetList();
+        }
+
         public List<Category> GetCategories(int languageId)
         {
-           return _categoryDal.GetAllOrderByLanguage(languageId); // Get All category by QueueId.. dxfdfdg
+           return _categoryDal.GetAllOrderByLanguage(languageId); // Get All category by QueueId..
+        }
+
+        public List<Category> GetCategoriesByLanguage(int LanguageId)
+        {
+            return _categoryDal.GetList(p => p.LanguageId == LanguageId);
         }
 
       
